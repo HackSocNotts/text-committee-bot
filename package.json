@@ -29,6 +29,7 @@
   "author": "Aaron Osher <aaron@aaronosher.io>",
   "license": "MIT",
   "dependencies": {
+    "nexmo": "^2.4.0",
     "tslib": "~1.9.3"
   }
 }
