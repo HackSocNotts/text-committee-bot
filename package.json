@@ -26,7 +26,8 @@
     "test": "jest --coverage",
     "test:watch": "jest --watch",
     "serve": "node build/index.js",
-    "start": "npm run build && npm run serve"
+    "start": "npm run build && npm run serve",
+    "dev": "./run-dev.sh"
   },
   "author": "Aaron Osher <aaron@aaronosher.io>",
   "license": "MIT",
