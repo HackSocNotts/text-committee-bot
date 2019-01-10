@@ -3,6 +3,7 @@ import { DISCORD_BOT_COMMAND } from '../../config';
 import addChannel from './addChannel';
 import removeChannel from './removeChannel';
 import sendMessage from '../sendMessage';
+import getChannels from './getChannels';
 
 const functionHandler = (msg: Message): void => {
   const rawMessage = msg.content.split(' ');
@@ -19,7 +20,11 @@ const functionHandler = (msg: Message): void => {
       break;
 
     case removeChannel.name:
-      addChannel.func(args, user, msg);
+      removeChannel.func(args, user, msg);
+      break;
+
+    case getChannels.name:
+      getChannels.func(args, user, msg);
       break;
 
     default:
