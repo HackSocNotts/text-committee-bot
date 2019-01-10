@@ -1,4 +1,4 @@
-import { verbose, RunResult } from 'sqlite3';
+import { verbose } from 'sqlite3';
 import { initUsers, initChannels } from './init';
 
 const sqlite3 = verbose();
@@ -8,7 +8,7 @@ db.serialize(() => {
   let query = initUsers();
   query += initChannels();
 
-  db.run(query, (_: RunResult, err: Error) => {
+  db.exec(query, (err: Error) => {
     if (err) {
       console.error("Error intialising database connection: ", `(${err.name})`, err.message, "\n", err.stack);
     } else {
