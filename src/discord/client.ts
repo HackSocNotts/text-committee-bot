@@ -1,5 +1,6 @@
 import { Client, Message } from 'discord.js';
 import { DISCORD_BOT_TOKEN, DISCORD_BOT_COMMAND } from '../config';
+import handle from './functions/handler';
 
 const client = new Client();
 
@@ -9,7 +10,7 @@ client.on('ready', () => {
 
 client.on('message', (msg: Message) => {
   if (msg.content.substr(0, DISCORD_BOT_COMMAND.length) === DISCORD_BOT_COMMAND) {
-    console.log(msg.content);
+    handle(msg);
   }
 });
 
