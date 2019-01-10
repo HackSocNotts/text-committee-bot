@@ -1,5 +1,5 @@
 import { Client, Message } from 'discord.js';
-import { DISCORD_BOT_TOKEN } from '../config';
+import { DISCORD_BOT_TOKEN, DISCORD_BOT_COMMAND } from '../config';
 
 const client = new Client();
 
@@ -8,7 +8,9 @@ client.on('ready', () => {
 });
 
 client.on('message', (msg: Message) => {
-  console.log(msg.content);
+  if (msg.content.substr(0, DISCORD_BOT_COMMAND.length) === DISCORD_BOT_COMMAND) {
+    console.log(msg.content);
+  }
 });
 
 client.login(DISCORD_BOT_TOKEN);
