@@ -1,6 +1,8 @@
 import { Message } from 'discord.js';
 import { DISCORD_BOT_COMMAND } from '../../config';
 import addChannel from './addChannel';
+import removeChannel from './removeChannel';
+import sendMessage from '../sendMessage';
 
 const functionHandler = (msg: Message): void => {
   const rawMessage = msg.content.split(' ');
@@ -16,8 +18,15 @@ const functionHandler = (msg: Message): void => {
       addChannel.func(args, user, msg);
       break;
 
+    case removeChannel.name:
+      addChannel.func(args, user, msg);
+      break;
+
     default:
-      return;
+      msg.channel.startTyping();
+      sendMessage(msg.channel, "I don't recognise that instruction")
+        .then(() => msg.channel.stopTyping())
+        .catch(() => msg.channel.stopTyping());
   }
 };
 
