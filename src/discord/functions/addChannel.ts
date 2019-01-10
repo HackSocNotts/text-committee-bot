@@ -17,7 +17,7 @@ const addChannel = {
       .then(() => {
         console.log("added")
 
-        return sendMessage(msg.channel, "Channel Added");
+        return sendMessage(msg.channel, `${msg.channel.toString()} Added`);
       })
       .then(() => msg.channel.stopTyping())
       .catch((err: Error) => {
