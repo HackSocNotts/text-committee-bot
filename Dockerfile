@@ -4,10 +4,14 @@ WORKDIR /usr/app/src
 
 RUN npm install yarn -g
 
-COPY . /usr/src/app
+COPY . .
 
 RUN yarn install
 
 RUN yarn build
 
-CMD ["yarn", "start"]
+RUN mkdir -p /usr/app/database/
+
+RUN touch /usr/app/database/committeeBot.db
+
+CMD ["yarn", "serve"]

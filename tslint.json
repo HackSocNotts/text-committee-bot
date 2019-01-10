@@ -20,6 +20,7 @@
     "no-console": false,
     "ordered-imports": false,
     "no-default-export": false,
+    "import-name": false,
     "typedef": [
       true,
       "parameter",
