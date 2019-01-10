@@ -1,0 +1,9 @@
+.git/
+build/
+_tests_/
+node_modules/
+.editorconfig
+.gitignore
+jest.config.js
+LICENSE
+README.md
