@@ -1,6 +1,6 @@
-import { TextChannel, DMChannel, GroupDMChannel, Message } from 'discord.js';
+import { TextChannel, DMChannel, GroupDMChannel, Message, RichEmbed, Attachment } from 'discord.js';
 
-export default (channel: TextChannel | DMChannel | GroupDMChannel, message: String): Promise<Message> => {
+export default (channel: TextChannel | DMChannel | GroupDMChannel, message: String | RichEmbed | Attachment): Promise<Message> => {
   return new Promise((resolve: Function) => {
     setTimeout(resolve, 600);
   })
