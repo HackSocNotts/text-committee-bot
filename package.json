@@ -24,7 +24,9 @@
     "build:watch": "tsc -w -p tsconfig.release.json",
     "lint": "tslint -t stylish --project \"tsconfig.json\"",
     "test": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "serve": "node build/index.js",
+    "start": "npm run build && npm run serve"
   },
   "author": "Aaron Osher <aaron@aaronosher.io>",
   "license": "MIT",
