@@ -1,5 +1,6 @@
-import { GuildMember, Message, GuildChannel } from 'discord.js';
+import { GuildMember, Message, TextChannel } from 'discord.js';
 import channels from '../../database/channels';
+import sendMessage from '../sendMessage';
 
 const addChannel = {
   name: 'addChannel'.toLowerCase(),
@@ -8,11 +9,23 @@ const addChannel = {
       return;
     }
 
-    const {name, id} = msg.channel as GuildChannel;
+    msg.channel.startTyping();
+
+    const {name, id} = msg.channel as TextChannel;
 
     channels.add({ name, id })
-      .then(() => console.log("added"))
-      .catch((err: Error) => console.error(err));
+      .then(() => {
+        console.log("added")
+
+        return sendMessage(msg.channel, "Channel Added");
+      })
+      .then(() => msg.channel.stopTyping())
+      .catch((err: Error) => {
+        console.error(err)
+
+        return sendMessage(msg.channel, "An error occured");
+      })
+      .then(() => msg.channel.stopTyping());
   }
 };
 
