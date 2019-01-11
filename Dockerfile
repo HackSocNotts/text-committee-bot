@@ -14,4 +14,6 @@ RUN mkdir -p /usr/app/database/
 
 RUN touch /usr/app/database/committeeBot.db
 
+ENV DB_LOCATION /usr/app/database
+
 CMD ["yarn", "serve"]
