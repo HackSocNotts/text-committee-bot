@@ -27,7 +27,9 @@
     "test:watch": "jest --watch",
     "serve": "node build/index.js",
     "start": "npm run build && npm run serve",
-    "dev": "./run-dev.sh"
+    "dev": "./run-dev.sh",
+    "export": "export $(grep -v '^#' .env | xargs)",
+    "start-dev": "npm run export && npm run start"
   },
   "author": "Aaron Osher <aaron@aaronosher.io>",
   "license": "MIT",

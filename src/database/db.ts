@@ -1,8 +1,9 @@
 import { verbose } from 'sqlite3';
 import { initUsers, initChannels } from './init';
+import { DB_LOCATION } from '../config';
 
 const sqlite3 = verbose();
-const db = new sqlite3.Database('/usr/app/database/committeeBot.db');
+const db = new sqlite3.Database(`${DB_LOCATION}/committeeBot.db`);
 
 db.serialize(() => {
   let query = initUsers();
