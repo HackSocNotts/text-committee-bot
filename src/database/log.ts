@@ -29,7 +29,24 @@ export const logMessage = (message: string): Promise<void> => {
   });
 };
 
+export const getLogs = (count: number): Promise<ILog[]> => {
+  return new Promise((resolve: Function, reject: Function) => {
+    db.all("SELECT * FROM log ORDER BY timestamp DESC LIMIT ?;", [count], (err: Error, logs: ILog[]) => {
+      if (err) {
+        return reject(err);
+      }
+
+      return resolve(logs.map((entry: ILog) => ({
+          ...entry,
+          dateTime: new Date(entry.timestamp),
+        })
+      ) as ILog[]);
+    });
+  });
+};
+
 export default {
   userAction: logUserAction,
   message: logMessage,
+  get: getLogs,
 };
