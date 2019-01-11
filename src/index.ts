@@ -1,9 +1,7 @@
 import db, { exit as dbExit } from './database/db';
 import client, { exit as discordExit } from './discord/client';
 
-process.on('SIGINT', (): void => {
-  console.log("Caught interrupt signal");
-
+export const die = () => {
   const promises: Promise<void>[] = [];
 
   if (db) {
@@ -19,5 +17,11 @@ process.on('SIGINT', (): void => {
     .catch((err: Error) => {
       console.error(`Failed to quit safely. Foricing exit.\n (${err.name}): ${err.message}\n`, err.stack);
       process.exit();
-    })
+    });
+};
+
+process.on('SIGINT', (): void => {
+  console.log("Caught interrupt signal");
+
+  die();
 });
