@@ -14,3 +14,13 @@ export const initChannels = (): string => {
 
   return query;
 };
+
+
+export const initLog = (): string => {
+  let query = 'CREATE TABLE IF NOT EXISTS log (';
+  query += 'userId TEXT,';
+  query += 'message TEXT NOT NULL,';
+  query += 'timestamp DATETIME NOT NULL);';
+
+  return query;
+}
