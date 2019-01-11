@@ -112,9 +112,26 @@ export const deleteUser = {
   },
 };
 
+export const getAll = (): Promise<IUser[]> => {
+  return new Promise((resolve: Function, reject: Function) => {
+    db.all("SELECT * FROM users", (err: Error, users: IUser[]) => {
+      if (err) {
+        return reject(err);
+      }
+      
+      if (users.length === 0) {
+        return reject(new NotFoundError("No users found"));
+      }
+
+      return resolve(users);
+    })
+  });
+};
+
 export default {
   add: addUser,
   get: getUser,
   find: findUser,
   delete: deleteUser,
+  getAll: getAll,
 };
