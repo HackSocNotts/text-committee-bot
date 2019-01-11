@@ -2,6 +2,7 @@ import { Client, Message } from 'discord.js';
 import { DISCORD_BOT_TOKEN, DISCORD_BOT_COMMAND } from '../config';
 import handle from './functions/handler';
 import { die } from '..';
+import presences from './presences';
 
 const client = new Client();
 
@@ -20,6 +21,13 @@ client.on('disconnect', () => {
 });
 
 client.login(DISCORD_BOT_TOKEN);
+
+setInterval(() => {
+  // tslint:disable-next-line:insecure-random
+  const presence = presences[Math.floor(Math.random()*presences.length)];
+
+  client.user.setPresence(presence);
+}, 60*1000)
 
 export default client;
 
