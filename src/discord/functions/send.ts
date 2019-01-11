@@ -49,6 +49,16 @@ const send = {
       }
 
       lastMessage = now;
+      
+      return sendMessage(msg.channel, `Message queued for ${recipients.length} users.`)
+      .then(() => msg.channel.stopTyping())
+      .catch((err: Error) => {
+        console.error(err)
+
+        return sendMessage(msg.channel, "An error occured");
+      })
+      .then(() => msg.channel.stopTyping());
+
     } catch (err) {
       if (err instanceof NotFoundError) {
         return sendMessage(msg.channel, "There aren't any users to send a message to.")
@@ -56,7 +66,7 @@ const send = {
           .catch((err2: Error) => {
             console.error(err2);
             msg.channel.stopTyping();
-          })
+          });
       }
 
       console.error(err);
@@ -66,17 +76,8 @@ const send = {
         .catch((err2: Error) => {
           console.error(err2);
           msg.channel.stopTyping();
-        })
+        });
     }
-
-    return sendMessage(msg.channel, `Message sent to all users`)
-      .then(() => msg.channel.stopTyping())
-      .catch((err: Error) => {
-        console.error(err)
-
-        return sendMessage(msg.channel, "An error occured");
-      })
-      .then(() => msg.channel.stopTyping());
   }
 };
 
