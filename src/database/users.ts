@@ -99,6 +99,17 @@ export const deleteUser = {
       })
     }); 
   },
+  byName: (nameId: string): Promise<void> => {
+    return new Promise((resolve: Function, reject: Function) => {
+      db.run("DELETE FROM users WHERE name = ?", [nameId], (err: Error, user: IUser) => {
+        if (err) {
+          return reject(err);
+        }
+
+        return resolve(user);
+      })
+    }); 
+  },
 };
 
 export default {

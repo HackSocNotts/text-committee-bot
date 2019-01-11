@@ -1,7 +1,6 @@
 import { GuildMember, Message } from 'discord.js';
 import sendMessage from '../sendMessage';
 import users from '../../database/users';
-import { isNumber } from 'util';
 import isValidChannel from '../utils/isValidChannel';
 
 const addUser = {
@@ -15,7 +14,7 @@ const addUser = {
 
     if (!user.hasPermission("ADMINISTRATOR")) {
       sendMessage(msg.channel, "You must be a an administrator to add users.");
-      
+
       return;
     }
 
@@ -25,15 +24,13 @@ const addUser = {
       return;
     }
 
-    if (!isNumber(phone)) {
+    if (isNaN(phone as unknown as number)) {
       sendMessage(msg.channel, "Invalid phone number");
       
       return;
     }
 
     msg.channel.startTyping();
-
-    console.log(userId, msg.mentions.members.array()[0].user);
 
     const userToAdd = msg.mentions.members.array()[0].user;
     const phoneNumber = parseInt(phone, 10);

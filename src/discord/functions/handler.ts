@@ -5,6 +5,7 @@ import removeChannel from './removeChannel';
 import sendMessage from '../sendMessage';
 import getChannels from './getChannels';
 import addUser from './addUser';
+import removeUser from './removeUser';
 
 const functionHandler = (msg: Message): void => {
   const rawMessage = msg.content.split(' ');
@@ -30,6 +31,10 @@ const functionHandler = (msg: Message): void => {
 
     case addUser.name:
       addUser.func(args, user, msg);
+      break;
+
+    case removeUser.name:
+      removeUser.func(args, user, msg);
       break;
 
     default:
