@@ -38,7 +38,7 @@ export const getLogs = (count: number): Promise<ILog[]> => {
 
       return resolve(logs.map((entry: ILog) => ({
           ...entry,
-          dateTime: new Date(entry.timestamp),
+          dateTime: new Date(parseInt(entry.timestamp, 10) * 1000),
         })
       ) as ILog[]);
     });
