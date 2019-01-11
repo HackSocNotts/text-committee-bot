@@ -5,7 +5,7 @@ import NotFoundError from '../errors/NotFoundError';
 
 export const addUser = (user: IUser): Promise<void> => {
   return new Promise((resolve: Function, reject: Function) => {
-    const stmt = db.prepare("INSERT INTO users [(name, phone)] VALUES (?, ?)");
+    const stmt = db.prepare("INSERT INTO users (name, phone) VALUES (?, ?)");
     stmt.run([user.name, user.phone], (_: RunResult, err: Error) => {
       if (err) {
         return reject(err);
@@ -99,4 +99,11 @@ export const deleteUser = {
       })
     }); 
   },
+};
+
+export default {
+  add: addUser,
+  get: getUser,
+  find: findUser,
+  delete: deleteUser,
 };
