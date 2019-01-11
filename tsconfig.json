@@ -16,7 +16,8 @@
     "noUnusedParameters": true,
     "noImplicitAny": false,
     "noImplicitThis": false,
-    "strictNullChecks": false
+    "strictNullChecks": false,
+    "typeRoots" : ["./typings", "node_modules/@types"]
   },
   "include": [
     "src/**/*",

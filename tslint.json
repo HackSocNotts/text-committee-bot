@@ -21,6 +21,7 @@
     "ordered-imports": false,
     "no-default-export": false,
     "import-name": false,
+    "no-require-imports": false,
     "typedef": [
       true,
       "parameter",
