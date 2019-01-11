@@ -4,6 +4,9 @@ import isValidChannel from '../utils/isValidChannel';
 import sendSMS from '../../nexmo/sendMessage';
 import users from '../../database/users';
 import NotFoundError from '../../errors/NotFoundError';
+import { FREQUENCY_LIMIT } from '../../config';
+
+let lastMessage = 0;
 
 const send = {
   name: 'send'.toLowerCase(),
@@ -20,7 +23,21 @@ const send = {
       return;
     }
 
+    const now = Math.round(Date.now().valueOf() / 1000)
+
     msg.channel.startTyping();
+
+    if (lastMessage + FREQUENCY_LIMIT > now) {
+      const nextMessageTime = new Date(lastMessage + FREQUENCY_LIMIT);
+      console.log("throttled");
+
+      return sendMessage(msg.channel, `There is a ${FREQUENCY_LIMIT} second frequency limit for sending messages. Please wait until ${nextMessageTime.toLocaleTimeString()} to send another msg.`)
+        .then(() => msg.channel.stopTyping())
+        .catch((err2: Error) => {
+          console.error(err2);
+          msg.channel.stopTyping();
+        });
+    }
 
     const messageToSend = `Message from ${user.displayName}:\n${message.join(" ")}`;
 
@@ -30,14 +47,16 @@ const send = {
       for (const recipient of recipients) {
         sendSMS(recipient.phone, messageToSend);
       }
+
+      lastMessage = now;
     } catch (err) {
       if (err instanceof NotFoundError) {
         return sendMessage(msg.channel, "There aren't any users to send a message to.")
-        .then(() => msg.channel.stopTyping())
-        .catch((err2: Error) => {
-          console.error(err2);
-          msg.channel.stopTyping();
-        })
+          .then(() => msg.channel.stopTyping())
+          .catch((err2: Error) => {
+            console.error(err2);
+            msg.channel.stopTyping();
+          })
       }
 
       console.error(err);
