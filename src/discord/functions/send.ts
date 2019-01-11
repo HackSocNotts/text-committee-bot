@@ -5,6 +5,7 @@ import sendSMS from '../../nexmo/sendMessage';
 import users from '../../database/users';
 import NotFoundError from '../../errors/NotFoundError';
 import { FREQUENCY_LIMIT } from '../../config';
+import log from '../../database/log';
 
 let lastMessage = 0;
 
@@ -33,9 +34,11 @@ const send = {
 
       return sendMessage(msg.channel, `There is a ${FREQUENCY_LIMIT} second frequency limit for sending messages. Please wait until ${nextMessageTime.toLocaleTimeString()} to send another msg.`)
         .then(() => msg.channel.stopTyping())
-        .catch((err2: Error) => {
-          console.error(err2);
+        .then(() => log.userAction(msg.member.id, "throttled"))
+        .catch((err: Error) => {
+          console.error(err);
           msg.channel.stopTyping();
+          log.message(err.message);
         });
     }
 
@@ -52,8 +55,10 @@ const send = {
       
       return sendMessage(msg.channel, `Message queued for ${recipients.length} users.`)
       .then(() => msg.channel.stopTyping())
+      .then(() => log.userAction(msg.member.id, `Sent:\n ${message.join(' ')}\nto ${recipients.length} users.`))
       .catch((err: Error) => {
         console.error(err)
+        log.message(err.message);
 
         return sendMessage(msg.channel, "An error occured");
       })
@@ -65,16 +70,20 @@ const send = {
           .then(() => msg.channel.stopTyping())
           .catch((err2: Error) => {
             console.error(err2);
+            log.message(err2.message);
+
             msg.channel.stopTyping();
           });
       }
 
       console.error(err);
+      log.message(err.message);
 
       return sendMessage(msg.channel, "An error occured")
         .then(() => msg.channel.stopTyping())
         .catch((err2: Error) => {
           console.error(err2);
+          log.message(err2.message);
           msg.channel.stopTyping();
         });
     }
