@@ -2,6 +2,7 @@ import { GuildMember, Message } from 'discord.js';
 import sendMessage from '../sendMessage';
 import users from '../../database/users';
 import isValidChannel from '../utils/isValidChannel';
+import log from '../../database/log';
 
 const addUser = {
   name: 'addUser'.toLowerCase(),
@@ -42,8 +43,10 @@ const addUser = {
         return sendMessage(msg.channel, `${userToAdd.toString()} Added`);
       })
       .then(() => msg.channel.stopTyping())
+      .then(() => log.userAction(msg.member.id, `Add ${userToAdd.toString()} with phone number: ${phoneNumber}`))
       .catch((err: Error) => {
-        console.error(err)
+        console.error(err);
+        log.message(err.message);
 
         return sendMessage(msg.channel, "An error occured");
       })

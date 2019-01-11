@@ -2,6 +2,7 @@ import { GuildMember, Message } from 'discord.js';
 import sendMessage from '../sendMessage';
 import users from '../../database/users';
 import isValidChannel from '../utils/isValidChannel';
+import log from '../../database/log';
 
 const removeUser = {
   name: 'removeUser'.toLowerCase(),
@@ -35,8 +36,10 @@ const removeUser = {
         return sendMessage(msg.channel, `${userToRemove.toString()} Removed`);
       })
       .then(() => msg.channel.stopTyping())
+      .then(() => log.userAction(msg.member.id, `Remove ${userToRemove.toString()}`))
       .catch((err: Error) => {
-        console.error(err)
+        console.error(err);
+        log.message(err.message);
 
         return sendMessage(msg.channel, "An error occured");
       })
