@@ -2,11 +2,20 @@ import { GuildMember, Message } from 'discord.js';
 import sendMessage from '../sendMessage';
 import users from '../../database/users';
 import { isNumber } from 'util';
+import isValidChannel from '../utils/isValidChannel';
 
 const addUser = {
   name: 'addUser'.toLowerCase(),
-  func: ([userId, phone]: string[], user: GuildMember, msg: Message): void => {
+  func: async ([userId, phone]: string[], user: GuildMember, msg: Message): Promise<void> => {
+    if (!(await isValidChannel(msg.channel.id))) {
+      console.error("Requested in invalid channel");
+
+      return;
+    }
+
     if (!user.hasPermission("ADMINISTRATOR")) {
+      sendMessage(msg.channel, "You must be a an administrator to add users.");
+      
       return;
     }
 
