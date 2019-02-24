@@ -24,3 +24,12 @@ export const initLog = (): string => {
 
   return query;
 }
+
+export const initConfig = (): string => {
+  let query = 'CREATE TABLE IF NOT EXISTS config (';
+  query += 'key TEXT NOT NULL,';
+  query += 'value TEXT,';
+  query += 'lastUpdated DATETIME NOT NULL);';
+
+  return query;
+}
