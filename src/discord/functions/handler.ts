@@ -54,7 +54,6 @@ const smsHandler = (functionName: string, args: string[], user: GuildMember, msg
 };
 
 const generalHandler = (functionName: string, args: string[], user: GuildMember, msg: Message) => {
-  console.log(args, user.id);
   switch (functionName.toLowerCase()) {    
     case getMembers.name:
       getMembers.func();
