@@ -1,5 +1,8 @@
 import db from './db';
 import { RunResult } from 'sqlite3';
+import IConfig from '../interfaces/IConfig';
+import IConfigs from '../interfaces/IConfigs';
+import NotFoundError from '../errors/NotFoundError';
 
 export const addConfig = (key: string, value: string | number): Promise<void> => {
   return new Promise((resolve: Function, reject: Function) => {
@@ -42,35 +45,49 @@ export const deleteConfig = (key: string): Promise<void> => {
   });
 };
 
-export const getConfig = (key: string): Promise<void> => {
+export const getConfig = (key: string): Promise<string | number> => {
   return new Promise((resolve: Function, reject: Function) => {
 
-    db.run("SELECT key, value FROM config WHERE key = ?;", [key], (_: RunResult, err: Error) => {
+    db.get("SELECT value FROM config WHERE key = ?;", [key], (err: Error, config: IConfig) => {
       if (err) {
         return reject(err);
       }
 
-      return resolve();
+      if (!config) {
+        return reject(new NotFoundError(`No no config with key (${key}) found`));
+      }
+
+      return resolve(config.value);
     });
   });
 };
 
-export const getAllConfigs = (): Promise<void> => {
+export const getAllConfigs = (): Promise<IConfigs> => {
   return new Promise((resolve: Function, reject: Function) => {
 
-    db.run("SELECT key, value FROM config;", [], (_: RunResult, err: Error) => {
+    db.all("SELECT value FROM config;", [], (err: Error, configs: IConfig[]) => {
       if (err) {
         return reject(err);
       }
 
-      return resolve();
+      if (!configs) {
+        return reject(new NotFoundError("No configs found"));
+      }
+
+      return resolve(
+        configs.reduce((acc: IConfigs, cur: IConfig) => {
+          acc[cur.key] = cur.value;
+
+          return acc;
+        }, {})
+      );
     });
   });
 };
 
 
 export default {
-  get: getConfig,
+  getConf: getConfig,
   getAll: getAllConfigs,
   add: addConfig,
   update: updateConfig,
