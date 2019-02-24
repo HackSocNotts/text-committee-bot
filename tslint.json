@@ -22,12 +22,17 @@
     "no-default-export": false,
     "import-name": false,
     "no-require-imports": false,
-    "typedef": [
-      true,
-      "parameter",
-      "arrow-parameter",
-      "property-declaration",
-      "member-variable-declaration"
-    ]
+    "typedef": {
+      "severity": "warn",
+      "options": [
+        "parameter",
+        "arrow-parameter",
+        "property-declaration",
+        "member-variable-declaration"
+      ]
+    },
+    "no-any": {
+      "severity":"warn"
+    }
   }
 }
