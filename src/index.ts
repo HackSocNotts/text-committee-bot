@@ -2,7 +2,7 @@ import db, { exit as dbExit } from './database/db';
 import client, { exit as discordExit } from './discord/client';
 
 export const die = () => {
-  const promises: Promise<void>[] = [];
+  const promises: Promise<any>[] = [];
 
   if (db) {
     promises.push(dbExit());
