@@ -9,6 +9,7 @@ import removeUser from './removeUser';
 import getUsers from './getUsers';
 import send from './send';
 import getLogs from './getLogs';
+import getMembers from './getMembers';
 
 const functionHandler = (msg: Message): void => {
   const rawMessage = msg.content.split(' ');
@@ -50,6 +51,10 @@ const functionHandler = (msg: Message): void => {
 
     case getLogs.name:
       getLogs.func(args, user, msg);
+      break;
+    
+    case getMembers.name:
+      getMembers.func();
       break;
 
     default:

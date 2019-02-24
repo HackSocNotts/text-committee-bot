@@ -38,6 +38,7 @@
     "discord.js": "^11.4.2",
     "nexmo": "^2.4.0",
     "sqlite3": "^4.0.4",
-    "tslib": "~1.9.3"
+    "tslib": "~1.9.3",
+    "ukmsl-student-group-member-scraper": "^0.1.2"
   }
 }
