@@ -3,6 +3,7 @@ import { DISCORD_SMS_BOT_TOKEN, DISCORD_SMS_BOT_COMMAND, DISCORD_GENERAL_BOT_COM
 import handle from './functions/handler';
 import { die } from '..';
 import presences from './presences';
+import generalConfig from '../bots/generalBot';
 
 const configureClient = (client: Client, command: String) => {
   client.on('ready', () => {
@@ -10,7 +11,6 @@ const configureClient = (client: Client, command: String) => {
   });
 
   client.on('message', (msg: Message) => {
-    console.log("message recieved", msg.content);
     if (msg.content.substr(0, command.length) === command && msg.content !== command) {
       handle(msg);
     }
@@ -25,6 +25,8 @@ const configureClient = (client: Client, command: String) => {
 
 const smsClient = configureClient(new Client(), DISCORD_SMS_BOT_COMMAND);
 const generalClient = configureClient(new Client(), DISCORD_GENERAL_BOT_COMMAND);
+
+generalConfig(generalClient);
 
 smsClient.login(DISCORD_SMS_BOT_TOKEN);
 generalClient.login(DISCORD_GENERAL_BOT_TOKEN);
