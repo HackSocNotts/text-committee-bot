@@ -10,6 +10,7 @@ import getUsers from './getUsers';
 import send from './send';
 import getLogs from './getLogs';
 import getMembers from './getMembers';
+import setConfig from './setConfig';
 
 const smsHandler = (functionName: string, args: string[], user: GuildMember, msg: Message) => {
   switch (functionName.toLowerCase()) {
@@ -43,6 +44,10 @@ const smsHandler = (functionName: string, args: string[], user: GuildMember, msg
 
     case getLogs.name:
       getLogs.func(args, user, msg);
+      break;
+
+    case setConfig.name:
+      setConfig.func(args, user, msg);
       break;
 
     default:
