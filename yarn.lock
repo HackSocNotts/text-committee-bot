@@ -1027,6 +1027,11 @@ expand-brackets@^2.1.4:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
+expand-keys@0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/expand-keys/-/expand-keys-0.0.5.tgz#96b08279db02b06c8a55301219faf96b560b1f25"
+  integrity sha512-84LHsjHU2VF+J8HtkrMKI6sHLKcIETotyDSfTmrvto8qTMqH2vNpxFM3UjVKEPbolUgAAry/BezoWPDpdrHg2w==
+
 expand-range@^1.8.1:
   version "1.8.2"
   resolved "https://registry.yarnpkg.com/expand-range/-/expand-range-1.8.2.tgz#a299effd335fe2721ebae8e257ec79644fc85337"
@@ -1244,6 +1249,13 @@ get-caller-file@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-1.0.3.tgz#f978fa4c90d1dfe7ff2d6beda2a515e713bdcf4a"
   integrity sha512-3t6rVToeoZfYSGd8YoLFR2DJkiQrIiUrGcjvFX2mDw3bn6k2OtwHN0TNCLbBO+w8qTvimhDkv+LSscbJY1vE6w==
+
+get-docker-secrets@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/get-docker-secrets/-/get-docker-secrets-0.1.7.tgz#a606089e0c25c9e75723265ecca9c30de202fa36"
+  integrity sha512-i+DliY9kqgch2jiHmejI7+ptczAlQeb1XQZvD1jq4j7+LyZvjgxHIPw6L8DcaC0tRonmlcTz4s/8cDpSeG+p/A==
+  dependencies:
+    expand-keys "0.0.5"
 
 get-stream@^3.0.0:
   version "3.0.0"
