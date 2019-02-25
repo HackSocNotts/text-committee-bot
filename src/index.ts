@@ -1,5 +1,6 @@
 import db, { exit as dbExit } from './database/db';
 import client, { exit as discordExit } from './discord/client';
+import killCron from './cron';
 
 export const die = () => {
   const promises: Promise<any>[] = [];
@@ -22,6 +23,6 @@ export const die = () => {
 
 process.on('SIGINT', (): void => {
   console.log("Caught interrupt signal");
-
+  killCron();
   die();
 });
