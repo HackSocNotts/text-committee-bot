@@ -22,7 +22,7 @@ export const updateConfig = (key: string, value: string | number): Promise<void>
   return new Promise((resolve: Function, reject: Function) => {
     const now = Math.round(Date.now().valueOf() / 1000);
 
-    db.run("UPDATE config (value, lastUpdated) VALUES (?, ?) WHERE key = ?;", [value, now, key], (_: RunResult, err: Error) => {
+    db.run("UPDATE config SET value = ?, lastUpdated = ? WHERE key = ?;", [value, now, key], (_: RunResult, err: Error) => {
       if (err) {
         return reject(err);
       }
@@ -48,7 +48,7 @@ export const deleteConfig = (key: string): Promise<void> => {
 export const getConfig = (key: string): Promise<string | number> => {
   return new Promise((resolve: Function, reject: Function) => {
 
-    db.get("SELECT value FROM config WHERE key = ?;", [key], (err: Error, config: IConfig) => {
+    db.get("SELECT key, value FROM config WHERE key = ?;", [key], (err: Error, config: IConfig) => {
       if (err) {
         return reject(err);
       }

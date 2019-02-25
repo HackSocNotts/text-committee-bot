@@ -27,7 +27,7 @@ export const initLog = (): string => {
 
 export const initConfig = (): string => {
   let query = 'CREATE TABLE IF NOT EXISTS config (';
-  query += 'key TEXT NOT NULL,';
+  query += 'key TEXT UNIQUE NOT NULL,';
   query += 'value TEXT,';
   query += 'lastUpdated DATETIME NOT NULL);';
 
