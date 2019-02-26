@@ -11,7 +11,7 @@ export const DISCORD_SMS_BOT_COMMAND      = secrets.DISCORD_SMS_BOT_COMMAND     
 export const DISCORD_GENERAL_BOT_TOKEN    = secrets.DISCORD_GENERAL_BOT_TOKEN     ||  process.env.DISCORD_GENERAL_BOT_TOKEN;
 export const DISCORD_GENERAL_BOT_COMMAND  = secrets.DISCORD_GENERAL_BOT_COMMAND   ||  process.env.DISCORD_GENERAL_BOT_COMMAND          || '!hacksoc';
 export const DB_LOCATION                  = secrets.DB_LOCATION                   ||  process.env.DB_LOCATION                          || `${__dirname}/../volumes/database`;
-export const FREQUENCY_LIMIT              = secrets.FREQUENCY_LIMIT               ||  process.env.FREQUENCY_LIMIT as unknown as number || 300;
+export const FREQUENCY_LIMIT              = parseInt(secrets.FREQUENCY_LIMIT, 10) ||  parseInt(process.env.FREQUENCY_LIMIT, 10)        || 300;
 
 // UMSL Configuration
 export const UKMSL_BASE_URL               = secrets.UKMSL_BASE_URL                ||  process.env.UKMSL_BASE_URL;
