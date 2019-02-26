@@ -1,5 +1,5 @@
-import { getDockerSecrets } from 'get-docker-secrets'
-const secrets = getDockerSecrets()
+import { getDockerSecrets } from 'get-docker-secrets';
+const secrets = getDockerSecrets();
 
 export const NEXMO_API                    = secrets.NEXMO_API                     ||  process.env.NEXMO_API;
 export const NEXMO_SECRET                 = secrets.NEXMO_SECRET                  ||  process.env.NEXMO_SECRET;
