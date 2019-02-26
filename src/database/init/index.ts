@@ -33,3 +33,12 @@ export const initConfig = (): string => {
 
   return query;
 }
+
+export const initMembers = (): string => {
+  let query = 'CREATE TABLE IF NOT EXISTS members (';
+  query += 'id INT PRIMARY KEY NOT NULL,';
+  query += 'name TEXT,'
+  query += 'discordId TEXT);';
+
+  return query;
+}
