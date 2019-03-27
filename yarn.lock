@@ -3814,10 +3814,10 @@ uglify-js@^3.1.4:
     commander "~2.17.1"
     source-map "~0.6.1"
 
-ukmsl-student-group-member-scraper@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/ukmsl-student-group-member-scraper/-/ukmsl-student-group-member-scraper-0.1.2.tgz#79b1d34bd4d0289304901f06b0518fe562892172"
-  integrity sha512-TuZprWi+WVHeG2JJ1EEOA8TpN0kePy5pnRmu3xM5y4TQuJ/1wT7Kz20M8ikQEVp+tjyaJx7naOIZiGfO2a7BCg==
+ukmsl-student-group-member-scraper@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/ukmsl-student-group-member-scraper/-/ukmsl-student-group-member-scraper-0.1.3.tgz#e500db9a369213c83ac9b025687db706241239ae"
+  integrity sha512-LaqHweoFW/njTlaVv24F0vdGGSiRz81Z2q0YzKk2p/U7BYk2O69WlX98tUFn+JHvMKn1SJGwd2i61IyottQHiQ==
   dependencies:
     cheerio "^1.0.0-rc.2"
     request "^2.88.0"
