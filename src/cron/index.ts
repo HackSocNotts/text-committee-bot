@@ -1,7 +1,9 @@
-// import members from './members';
+import members from './members';
+
+members();
 
 const cron = setInterval(() => {
-  // members();
+  members();
 }, 60000);
 
 export default () => {
