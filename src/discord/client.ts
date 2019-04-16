@@ -2,8 +2,8 @@ import { Client, Message } from 'discord.js';
 import { DISCORD_SMS_BOT_TOKEN, DISCORD_SMS_BOT_COMMAND, DISCORD_GENERAL_BOT_COMMAND, DISCORD_GENERAL_BOT_TOKEN } from '../config';
 import handle from './functions/handler';
 import { die } from '..';
-import presences from './presences';
 import generalConfig from '../bots/generalBot';
+import committeeConfig from '../bots/committeeBot';
 
 const configureClient = (client: Client, command: String) => {
   client.on('ready', () => {
@@ -23,23 +23,17 @@ const configureClient = (client: Client, command: String) => {
   return client;
 }
 
-const smsClient = configureClient(new Client(), DISCORD_SMS_BOT_COMMAND);
+const committeeClient = configureClient(new Client(), DISCORD_SMS_BOT_COMMAND);
 const generalClient = configureClient(new Client(), DISCORD_GENERAL_BOT_COMMAND);
 
 generalConfig(generalClient);
+committeeConfig(committeeClient)
 
-smsClient.login(DISCORD_SMS_BOT_TOKEN);
+committeeClient.login(DISCORD_SMS_BOT_TOKEN);
 generalClient.login(DISCORD_GENERAL_BOT_TOKEN);
 
-setInterval(() => {
-  // tslint:disable-next-line:insecure-random
-  const presence = presences[Math.floor(Math.random()*presences.length)];
-
-  smsClient.user.setPresence(presence);
-}, 60*1000)
-
-export default smsClient;
+export default [committeeClient, generalClient];
 
 export const exit = () => {
-  return Promise.all([smsClient.destroy(), generalClient.destroy()]);
+  return Promise.all([committeeClient.destroy(), generalClient.destroy()]);
 }

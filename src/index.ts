@@ -1,5 +1,5 @@
 import db, { exit as dbExit } from './database/db';
-import client, { exit as discordExit } from './discord/client';
+import clients, { exit as discordExit } from './discord/client';
 import killCron from './cron';
 
 export const die = () => {
@@ -9,8 +9,11 @@ export const die = () => {
     promises.push(dbExit());
   }
   
-  if (client) {
-    promises.push(discordExit());
+  for (const client of clients) {
+    if (client) {
+      promises.push(discordExit());
+      break;
+    }
   }
       
   Promise.all(promises)
