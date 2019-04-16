@@ -2,6 +2,7 @@ import db from './db';
 import { RunResult } from 'sqlite3';
 import NotFoundError from '../errors/NotFoundError';
 import IMember from '../interfaces/IMember';
+import { Snowflake } from 'discord.js';
 
 export const addMember = (member: IMember): Promise<void> => {
   return new Promise((resolve: Function, reject: Function) => {
@@ -41,16 +42,28 @@ export const getAllMembers = (): Promise<IMember[]> => {
 
 export const getMember = (id: number): Promise<IMember> => {
   return new Promise((resolve: Function, reject: Function) => {
-    db.get("SELECT * FROM member WHERE id=?;", [id], (err: Error, row: IMember) => {
+    db.get("SELECT * FROM members WHERE id=?;", [id], (err: Error, row: IMember) => {
       if (err) {
         return reject(err);
       }
 
       if (!row) {
-        return reject(new NotFoundError("No channel exists with that name"));
+        return reject(new NotFoundError("No member exists with that id"));
       }
 
       return resolve(row);
+    });
+  });
+};
+
+export const updateDiscordId = (id: number, discordID: Snowflake) => {
+  return new Promise((resolve: Function, reject: Function) => {
+    db.run("UPDATE members SET discordId=? WHERE id=?;", [discordID, id], (_: RunResult, err: Error) => {
+      if (err) {
+        return reject(err);
+      }
+
+      return resolve();
     });
   });
 };
@@ -60,4 +73,5 @@ export default {
   remove: removeMember,
   getAll: getAllMembers,
   get: getMember,
+  addDiscord: updateDiscordId,
 };
