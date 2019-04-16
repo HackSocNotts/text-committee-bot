@@ -12,6 +12,8 @@ export const DISCORD_GENERAL_BOT_TOKEN    = secrets.DISCORD_GENERAL_BOT_TOKEN   
 export const DISCORD_GENERAL_BOT_COMMAND  = secrets.DISCORD_GENERAL_BOT_COMMAND   ||  process.env.DISCORD_GENERAL_BOT_COMMAND          || '!hacksoc';
 export const DB_LOCATION                  = secrets.DB_LOCATION                   ||  process.env.DB_LOCATION                          || `${__dirname}/../volumes/database`;
 export const FREQUENCY_LIMIT              = parseInt(secrets.FREQUENCY_LIMIT, 10) ||  parseInt(process.env.FREQUENCY_LIMIT, 10)        || 300;
+export const GUILD_ID                     = secrets.GUILD_ID                      ||  process.env.GUILD_ID;
+export const MEMBER_ROLE_ID               = secrets.MEMBER_ROLE_ID                ||  process.env.MEMBER_ROLE_ID;
 
 // UMSL Configuration
 export const UKMSL_BASE_URL               = secrets.UKMSL_BASE_URL                ||  process.env.UKMSL_BASE_URL;
