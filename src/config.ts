@@ -14,6 +14,8 @@ export const DB_LOCATION                  = secrets.DB_LOCATION                 
 export const FREQUENCY_LIMIT              = parseInt(secrets.FREQUENCY_LIMIT, 10) ||  parseInt(process.env.FREQUENCY_LIMIT, 10)        || 300;
 export const GUILD_ID                     = secrets.GUILD_ID                      ||  process.env.GUILD_ID;
 export const MEMBER_ROLE_ID               = secrets.MEMBER_ROLE_ID                ||  process.env.MEMBER_ROLE_ID;
+export const JOB_APPROVAL_CHANNEL_ID      = secrets.JOB_APPROVAL_CHANNEL_ID       ||  process.env.JOB_APPROVAL_CHANNEL_ID;
+export const JOB_CHANNEL_ID               = secrets.JOB_CHANNEL_ID                ||  process.env.JOB_CHANNEL_ID;
 
 // UMSL Configuration
 export const UKMSL_BASE_URL               = secrets.UKMSL_BASE_URL                ||  process.env.UKMSL_BASE_URL;
