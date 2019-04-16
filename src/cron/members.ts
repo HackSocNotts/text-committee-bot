@@ -6,10 +6,13 @@ import {
   UKMSL_ASPXAUTH,
   UKMSL_ANTI_XSRF_TOKEN,
   UKMSL_FORM_BODY,
-  UKMSL_GROUP_ID
+  UKMSL_GROUP_ID,
+  VOTE_MEMBERS_HOOK,
+  VOTE_MEMBERS_SECRET,
 } from '../config';
 import IMember from '../interfaces/IMember';
 import Members from '../database/suMembers';
+import * as rp from 'request-promise-native';
 
 const config: UKMSLConfig = {
   baseUrl: UKMSL_BASE_URL,
@@ -45,6 +48,18 @@ export default () => {
             .catch((err: Error) => console.error("Failed to add member", member, err));
         }
       }
+
+      return rp({
+        uri: VOTE_MEMBERS_HOOK,
+        headers: {
+          authorization: `Bearer ${VOTE_MEMBERS_SECRET}`,
+        },
+        method: 'POST',
+        body: {
+          members
+        },
+        json: true,
+      });
     })
     .catch((err: Error) => console.error("Error fetching members", err));
 }

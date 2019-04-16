@@ -21,3 +21,7 @@ export const UKMSL_ASPNET_SESSIONID       = secrets.UKMSL_ASPNET_SessionId      
 export const UKMSL_ASPXAUTH               = secrets.UKMSL_ASPXAUTH                ||  process.env.UKMSL_ASPXAUTH;
 export const UKMSL_ANTI_XSRF_TOKEN        = secrets.UKMSL_AntiXsrfToken           ||  process.env.UKMSL_AntiXsrfToken;
 export const UKMSL_FORM_BODY              = secrets.UKMSL_FORM_BODY               ||  process.env.UKMSL_FORM_BODY;
+
+// Vote Bot Member List 
+export const VOTE_MEMBERS_HOOK            = secrets.VOTE_MEMBERS_HOOK             || process.env.VOTE_MEMBERS_HOOK;
+export const VOTE_MEMBERS_SECRET          = secrets.VOTE_MEMBERS_SECRET           || process.env.VOTE_MEMBERS_SECRET;
