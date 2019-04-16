@@ -11,6 +11,10 @@ const configureClient = (client: Client, command: String) => {
   });
 
   client.on('message', (msg: Message) => {
+    if (msg.client.user.id === msg.author.id) {
+      return;
+    }
+
     if (msg.content.substr(0, command.length) === command && msg.content !== command) {
       handle(msg);
     }
