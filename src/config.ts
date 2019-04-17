@@ -21,6 +21,10 @@ export const MEMBER_ROLE_ID               = secrets.MEMBER_ROLE_ID              
 export const JOB_APPROVAL_CHANNEL_ID      = secrets.JOB_APPROVAL_CHANNEL_ID       ||  process.env.JOB_APPROVAL_CHANNEL_ID;
 export const JOB_CHANNEL_ID               = secrets.JOB_CHANNEL_ID                ||  process.env.JOB_CHANNEL_ID;
 
+// Mailgun Config
+export const MAILGUN_API                  = secrets.MAILGUN_API                   ||  process.env.MAILGUN_API;
+export const MAILGUN_DOMAIN               = secrets.MAILGUN_DOMAIN                ||  process.env.MAILGUN_DOMAIN;
+
 // Service Config
 export const DB_LOCATION                  = secrets.DB_LOCATION                   ||  process.env.DB_LOCATION                          || `${__dirname}/../volumes/database`;
 export const PORT                         = secrets.PORT                          ||  process.env.PORT                                 || 3000;
