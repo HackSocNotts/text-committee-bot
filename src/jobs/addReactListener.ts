@@ -2,6 +2,7 @@ import { Message, Client, Collection, MessageReaction, RichEmbed, CollectorFilte
 import IJob from '../interfaces/IJob';
 import jobs from '../database/jobs';
 import postJob from './postJob';
+import { sendApproved, sendRejected } from './sendMessage';
 
 const addReactListener = async (message: Message, client: Client, job: IJob, embed: RichEmbed) => {
   const filter: CollectorFilter = (reaction: MessageReaction, user: User) => {
@@ -18,18 +19,21 @@ const addReactListener = async (message: Message, client: Client, job: IJob, emb
         case '👍':
           embed.title = 'Approved Job Posting';
           await message.edit(embed);
+          sendApproved(job.name, job.email);
 
           return jobs.approve(message.id, (await postJob(job, client)).id);
         
         case'👎':
           embed.title = 'Rejected Job Posting';
           await message.edit(embed);
+          sendRejected(job.name, job.email);
 
           return jobs.reject(message.id);
         
         case'🚫':
           embed.title = 'Rejected and Baned Job Posting';
           await message.edit(embed);
+          sendRejected(job.name, job.email);
 
           return jobs.reject(message.id)
             .then(() => jobs.ban.add(job.email));
