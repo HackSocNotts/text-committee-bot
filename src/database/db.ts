@@ -22,6 +22,8 @@ db.serialize(() => {
   });
 });
 
+// db.on("trace", console.log);
+
 export default db;
 
 export const exit = (): Promise<void> => {

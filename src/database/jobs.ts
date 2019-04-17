@@ -3,20 +3,13 @@ import db from './db';
 import NotFoundError from '../errors/NotFoundError';
 import IJob from '../interfaces/IJob';
 import { Snowflake } from 'discord.js';
-import IRawJob from '../interfaces/IRawJob';
 
 export const addJob = (job: IJob): Promise<void> => {
   return new Promise((resolve: Function, reject: Function) => {
-    const stmt = db.prepare("INSERT INTO jobs (submitterEmail, submitterName, submitterTitle, description, approvalMessage) VALUES (?, ?, ?, ?, ?)");
-    stmt.run([job.email, job.name, job.title, job.company, job.description, job.approvalMessage], (_: RunResult, err: Error) => {
+    db.run("INSERT INTO jobs (email, name, title, company, description, approvalMessage) VALUES (?, ?, ?, ?, ?, ?);", [job.email, job.name, job.title, job.company, job.description, job.approvalMessage], (_: RunResult, err: Error) => {
       if (err) {
         return reject(err);
       }
-    });
-    stmt.finalize((err: Error) => {
-      if (err) {
-        return reject(err);
-      };
 
       return resolve();
     });
@@ -26,7 +19,7 @@ export const addJob = (job: IJob): Promise<void> => {
 export const getJob = {
   byApproval: (message: Snowflake): Promise<IJob> => {
     return new Promise((resolve: Function, reject: Function) => {
-      db.get("SELECT * FROM jobs WHERE approvalMessage = ?", [message], (err: Error, job: IRawJob) => {
+      db.get("SELECT * FROM jobs WHERE approvalMessage = ?", [message], (err: Error, job: IJob) => {
         if (err) {
           return reject(err);
         }
@@ -35,24 +28,13 @@ export const getJob = {
           return reject(new NotFoundError("No job from that message"));
         }
 
-        const parsedJob: IJob = {
-          name: job.submitterName,
-          title: job.submitterTitle,
-          company: job.submitterCompany,
-          email: job.submitterEmail,
-          description: job.description,
-          approvalMessage: job.approvalMessage,
-          approved: job.approved,
-          postedMessage: job.postedMessage,
-        };
-
-        return resolve(parsedJob);
+        return resolve(job);
       })
     });
   },
   byPosting: (message: Snowflake): Promise<IJob> => {
     return new Promise((resolve: Function, reject: Function) => {
-      db.get("SELECT * FROM jobs WHERE postedMessage = ?", [message], (err: Error, job: IRawJob) => {
+      db.get("SELECT * FROM jobs WHERE postedMessage = ?", [message], (err: Error, job: IJob) => {
         if (err) {
           return reject(err);
         }
@@ -61,18 +43,7 @@ export const getJob = {
           return reject(new NotFoundError("No job from that message"));
         }
 
-        const parsedJob: IJob = {
-          name: job.submitterName,
-          title: job.submitterTitle,
-          company: job.submitterCompany,
-          email: job.submitterEmail,
-          description: job.description,
-          approvalMessage: job.approvalMessage,
-          approved: job.approved,
-          postedMessage: job.postedMessage,
-        };
-
-        return resolve(parsedJob);
+        return resolve(job);
       })
     });
   },

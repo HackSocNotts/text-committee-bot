@@ -45,14 +45,13 @@ export const initMembers = (): string => {
 
 export const initJobs = (): string => {
   let query = 'CREATE TABLE IF NOT EXISTS jobs (';
-  query += 'id INT PRIMARY KEY NOT NULL,';
-  query += 'submitterEmail TEXT,'
-  query += 'submitterName TEXT,'
-  query += 'submitterTitle TEXT,'
-  query += 'submitterCompany TEXT,'
+  query += 'email TEXT,'
+  query += 'name TEXT,'
+  query += 'title TEXT,'
+  query += 'company TEXT,'
   query += 'description TEXT,'
   query += 'approvalMessage TEXT,'
-  query += 'approved BOOL,'
+  query += 'approved INT,'
   query += 'postedMessage TEXT);';
   query += 'CREATE TABLE IF NOT EXISTS bannedSubmitters (';
   query += 'id INT PRIMARY KEY NOT NULL,';
