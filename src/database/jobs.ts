@@ -47,6 +47,21 @@ export const getJob = {
       })
     });
   },
+  byMessage: (message: Snowflake): Promise<IJob> => {
+    return new Promise((resolve: Function, reject: Function) => {
+      db.get("SELECT * FROM jobs WHERE postedMessage = ? OR approvalMessage = ?;", [message, message], (err: Error, job: IJob) => {
+        if (err) {
+          return reject(err);
+        }
+        
+        if (!job) {
+          return reject(new NotFoundError("No job from that message"));
+        }
+
+        return resolve(job);
+      })
+    });
+  },
 };
 
 export const approve = (message: Snowflake, posting: Snowflake): Promise<void> => {

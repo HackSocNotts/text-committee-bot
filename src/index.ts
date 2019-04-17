@@ -1,6 +1,12 @@
 import db, { exit as dbExit } from './database/db';
 import clients, { exit as discordExit } from './discord/client';
 import killCron from './cron';
+import * as Koa from 'koa';
+import httpConfig from './http';
+
+const app = new Koa();
+
+httpConfig(app, clients[0], clients[1]);
 
 export const die = () => {
   const promises: Promise<any>[] = [];
