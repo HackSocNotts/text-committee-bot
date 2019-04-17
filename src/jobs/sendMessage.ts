@@ -9,7 +9,7 @@ const SIGNATURE = "Kind Regards,\nThe HackSoc Team\ninfo@hacksocnotts.co.uk\nhac
 
 export const sendApproved = (name: string, email:string) => {
   const to = `${name} <${email}>`;
-  const message = `Dear ${name}\n${APPROVE_MESSAGE}\n${SIGNATURE}`;
+  const message = `Dear ${name},\n\n${APPROVE_MESSAGE}\n\n${SIGNATURE}`;
 
   send(FROM, to, APPROVE_SUBJECT, message)
     .catch(console.error);
@@ -17,7 +17,7 @@ export const sendApproved = (name: string, email:string) => {
 
 export const sendRejected = (name: string, email:string) => {
   const to = `${name} <${email}>`;
-  const message = `Dear ${name}\n${REJECT_MESSAGE}\n${SIGNATURE}`;
+  const message = `Dear ${name},\n\n${REJECT_MESSAGE}\n\n${SIGNATURE}`;
 
   send(FROM, to, REJECT_SUBJECT, message)
     .catch(console.error);
