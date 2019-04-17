@@ -11,6 +11,7 @@ import send from './send';
 import getLogs from './getLogs';
 import getMembers from './getMembers';
 import setConfig from './setConfig';
+import message from './message';
 
 const smsHandler = (functionName: string, args: string[], user: GuildMember, msg: Message) => {
   switch (functionName.toLowerCase()) {
@@ -48,6 +49,10 @@ const smsHandler = (functionName: string, args: string[], user: GuildMember, msg
 
     case setConfig.name:
       setConfig.func(args, user, msg);
+      break;
+
+    case message.name:
+      message.func(args, user, msg);
       break;
 
     default:
