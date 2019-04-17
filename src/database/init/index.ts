@@ -42,3 +42,21 @@ export const initMembers = (): string => {
 
   return query;
 }
+
+export const initJobs = (): string => {
+  let query = 'CREATE TABLE IF NOT EXISTS jobs (';
+  query += 'id INT PRIMARY KEY NOT NULL,';
+  query += 'submitterEmail TEXT,'
+  query += 'submitterName TEXT,'
+  query += 'submitterTitle TEXT,'
+  query += 'submitterCompany TEXT,'
+  query += 'description TEXT,'
+  query += 'approvalMessage TEXT,'
+  query += 'approved BOOL,'
+  query += 'postedMessage TEXT);';
+  query += 'CREATE TABLE IF NOT EXISTS bannedSubmitters (';
+  query += 'id INT PRIMARY KEY NOT NULL,';
+  query += 'submitterEmail TEXT);'
+
+  return query;
+}

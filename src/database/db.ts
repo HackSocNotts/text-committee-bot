@@ -1,5 +1,5 @@
 import { verbose } from 'sqlite3';
-import { initUsers, initChannels, initLog, initConfig, initMembers } from './init';
+import { initUsers, initChannels, initLog, initConfig, initMembers, initJobs } from './init';
 import { DB_LOCATION } from '../config';
 
 const sqlite3 = verbose();
@@ -11,6 +11,7 @@ db.serialize(() => {
   query += initLog();
   query += initConfig();
   query += initMembers();
+  query += initJobs();
 
   db.exec(query, (err: Error) => {
     if (err) {
