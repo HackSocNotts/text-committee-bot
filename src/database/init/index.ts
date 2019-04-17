@@ -54,7 +54,6 @@ export const initJobs = (): string => {
   query += 'approved INT,'
   query += 'postedMessage TEXT);';
   query += 'CREATE TABLE IF NOT EXISTS bannedSubmitters (';
-  query += 'id INT PRIMARY KEY NOT NULL,';
   query += 'submitterEmail TEXT);'
 
   return query;
