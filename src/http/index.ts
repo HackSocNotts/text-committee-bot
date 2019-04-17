@@ -10,7 +10,7 @@ const postJob = async (job: IJob, client: Client): Promise<Message> => {
   const channel = client.channels.get(JOB_CHANNEL_ID) as TextChannel;
 
   try {
-    const submitterString = (job.company) ? (job.title) ? ` | ${job.title} at ${job.company}` : `from ${job.company}` : '';
+    const submitterString = (job.company) ? (job.title) ? ` | ${job.title} at ${job.company}` : ` from ${job.company}` : '';
 
     const embed = new RichEmbed({
       title: `Job Posting by ${job.name}${submitterString}`,
@@ -37,9 +37,14 @@ export default (app: koa<any>, committeeClient: Client, generalClient: Client) =
     const description = payload.Description;
 
     const approvalChannel = committeeClient.channels.get(JOB_APPROVAL_CHANNEL_ID) as TextChannel;
-    // const jobChannel: Channel = committeeClient.channels.filter((channel: Channel) => channel.id === JOB_CHANNEL_ID)[0];
 
     try {
+      if (await jobs.ban.search(email)) {
+        ctx.response.status = 403; ctx.response.message = "Banned";
+
+        return;
+      }
+
       const embed = new RichEmbed({
         title: `New Job Posting`,
         description: "Select 👍 to approve the job listing, 👎 to deny it, or 🚫 to block the submitter.",

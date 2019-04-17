@@ -120,17 +120,17 @@ export const ban = {
   },
   search: (email: string): Promise<boolean> => {
     return new Promise((resolve: Function, reject: Function) => {
-      const stmt = db.prepare("SELECT count(id) FROM bannedSubmitters WHERE submitterEmail = ?;");
-      stmt.get([email], (err: Error, row: number) => {
+      const stmt = db.prepare("SELECT count(*) as count FROM bannedSubmitters WHERE submitterEmail = ?;");
+      stmt.get([email], (err: Error, row: {count: number}) => {
         if (err) {
           return reject(err);
         }
   
-        if (!row) {
-          return resolve(false);
+        if (row.count > 0) {
+          return resolve(true);
         }
   
-        return resolve(true);
+        return resolve(false);
       });
     });
   }
