@@ -1,21 +1,28 @@
 import { getDockerSecrets } from 'get-docker-secrets';
 const secrets = getDockerSecrets();
 
+// Nexmo config
 export const NEXMO_API                    = secrets.NEXMO_API                     ||  process.env.NEXMO_API;
 export const NEXMO_SECRET                 = secrets.NEXMO_SECRET                  ||  process.env.NEXMO_SECRET;
 export const NEXMO_APPLICATION            = secrets.NEXMO_APPLICATION             ||  process.env.NEXMO_APPLICATION;
+
+// SMS Rate Limiting
+export const FREQUENCY_LIMIT              = parseInt(secrets.FREQUENCY_LIMIT, 10) ||  parseInt(process.env.FREQUENCY_LIMIT, 10)        || 300;
+
+// Discrod Config
 export const DISCORD_CLIENT_ID            = secrets.DISCORD_CLIENT_ID             ||  process.env.DISCORD_CLIENT_ID;
 export const DISCORD_CLIENT_SECRET        = secrets.DISCORD_CLIENT_SECRET         ||  process.env.DISCORD_CLIENT_SECRET;
 export const DISCORD_SMS_BOT_TOKEN        = secrets.DISCORD_SMS_BOT_TOKEN         ||  process.env.DISCORD_SMS_BOT_TOKEN;
 export const DISCORD_SMS_BOT_COMMAND      = secrets.DISCORD_SMS_BOT_COMMAND       ||  process.env.DISCORD_SMS_BOT_COMMAND              || '!sms';
 export const DISCORD_GENERAL_BOT_TOKEN    = secrets.DISCORD_GENERAL_BOT_TOKEN     ||  process.env.DISCORD_GENERAL_BOT_TOKEN;
 export const DISCORD_GENERAL_BOT_COMMAND  = secrets.DISCORD_GENERAL_BOT_COMMAND   ||  process.env.DISCORD_GENERAL_BOT_COMMAND          || '!hacksoc';
-export const DB_LOCATION                  = secrets.DB_LOCATION                   ||  process.env.DB_LOCATION                          || `${__dirname}/../volumes/database`;
-export const FREQUENCY_LIMIT              = parseInt(secrets.FREQUENCY_LIMIT, 10) ||  parseInt(process.env.FREQUENCY_LIMIT, 10)        || 300;
 export const GUILD_ID                     = secrets.GUILD_ID                      ||  process.env.GUILD_ID;
 export const MEMBER_ROLE_ID               = secrets.MEMBER_ROLE_ID                ||  process.env.MEMBER_ROLE_ID;
 export const JOB_APPROVAL_CHANNEL_ID      = secrets.JOB_APPROVAL_CHANNEL_ID       ||  process.env.JOB_APPROVAL_CHANNEL_ID;
 export const JOB_CHANNEL_ID               = secrets.JOB_CHANNEL_ID                ||  process.env.JOB_CHANNEL_ID;
+
+// Service Config
+export const DB_LOCATION                  = secrets.DB_LOCATION                   ||  process.env.DB_LOCATION                          || `${__dirname}/../volumes/database`;
 export const PORT                         = secrets.PORT                          ||  process.env.PORT                                 || 3000;
 
 // UMSL Configuration
