@@ -7,6 +7,7 @@ import IJob from '../interfaces/IJob';
 import handleHook from '../jobs/handleHook';
 
 
+// tslint:disable-next-line:no-any
 export default (app: koa<any>, committeeClient: Client, generalClient: Client) => {
   const router = new Router();
 

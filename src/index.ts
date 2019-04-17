@@ -9,6 +9,7 @@ const app = new Koa();
 httpConfig(app, clients[0], clients[1]);
 
 export const die = () => {
+  // tslint:disable-next-line:no-any
   const promises: Promise<any>[] = [];
 
   if (db) {
