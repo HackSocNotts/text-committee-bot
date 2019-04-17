@@ -16,6 +16,7 @@ export const GUILD_ID                     = secrets.GUILD_ID                    
 export const MEMBER_ROLE_ID               = secrets.MEMBER_ROLE_ID                ||  process.env.MEMBER_ROLE_ID;
 export const JOB_APPROVAL_CHANNEL_ID      = secrets.JOB_APPROVAL_CHANNEL_ID       ||  process.env.JOB_APPROVAL_CHANNEL_ID;
 export const JOB_CHANNEL_ID               = secrets.JOB_CHANNEL_ID                ||  process.env.JOB_CHANNEL_ID;
+export const PORT                         = secrets.PORT                          ||  process.env.PORT                                 || 3000;
 
 // UMSL Configuration
 export const UKMSL_BASE_URL               = secrets.UKMSL_BASE_URL                ||  process.env.UKMSL_BASE_URL;
