@@ -48,7 +48,7 @@
     "nexmo": "^2.4.0",
     "request-promise": "^4.2.4",
     "request-promise-native": "^1.0.7",
-    "sqlite3": "^4.0.4",
+    "sqlite3": "^4.1.1",
     "tslib": "~1.9.3",
     "ukmsl-student-group-member-scraper": "^0.1.3"
   }
