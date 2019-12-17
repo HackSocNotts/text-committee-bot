@@ -45,7 +45,7 @@
     "koa-body": "^4.1.0",
     "koa-router": "^7.4.0",
     "mailgun-js": "^0.22.0",
-    "nexmo": "^2.4.0",
+    "nexmo": "^2.5.2",
     "request-promise": "^4.2.4",
     "request-promise-native": "^1.0.7",
     "sqlite3": "^4.0.4",
